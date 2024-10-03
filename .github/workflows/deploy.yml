@@ -3,7 +3,7 @@ name: Deploy to S3 and Invalidate CloudFront
 on:
   push:
     branches:
-      - master  # Trigger con push a master
+      - main  # Trigger the action when pushing to the main branch
 
 jobs:
   deploy:
@@ -23,9 +23,9 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Sync files to S3
+      - name: Sync website folder to S3
         run: |
-          aws s3 sync ./ s3://${{ secrets.AWS_S3_BUCKET }} --delete
+          aws s3 sync ./website/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
 
       - name: Invalidate CloudFront Cache
         run: |
