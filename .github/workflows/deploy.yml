@@ -23,9 +23,9 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Sync website folder to S3
+      - name: Sync Website folder to S3
         run: |
-          aws s3 sync ./website/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
+          aws s3 sync ./Website/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
 
       - name: Invalidate CloudFront Cache
         run: |
